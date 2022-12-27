@@ -1,0 +1,62 @@
+.deviceDetails{
+    width: 70vw;
+    
+    margin: auto;
+    /* flex-direction: row;
+    flex: 6; */
+    
+    position: relative;
+}
+.addButton{
+    position: absolute;
+    bottom: 100%;
+}
+.column{
+    display: flex;
+    flex-direction: column;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* .column{
+    display: flex;
+    flex: 6;
+    justify-content: space-between;
+} */
+/* .leftContainer{
+    margin: 0 100px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex: 6;
+} */
+/* .rightContainer{
+    margin: 0 100px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    flex: 6;
+} */
+/* .rightContainer button{
+    height: 35px;
+    width: 100px;
+} */
+.installButton{
+    height: 35px;
+    width: 100px;
+    color: white;
+    background-color: #2196f3;
+    border: 1px solid white;
+    border-radius: 25px;
+    transition: all .3s;
+    margin-left: 50px;
+}
+.installButton:hover{
+    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+  transform: scale(1.05);
+  background-color: #0b8df7;
+}

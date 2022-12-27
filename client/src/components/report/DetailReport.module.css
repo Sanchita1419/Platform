@@ -1,0 +1,45 @@
+.image{
+    height: 50%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.imageBox{
+    align-items: center;
+    height: 40%;
+    padding: 5px;
+}
+.image img{
+    height: 100%;
+    width: 100%;
+}
+.details{
+    text-align: center;
+    margin-top: 10px;
+}
+.detailsFooter{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+.detailsFooter h5{
+    font-size: 1rem;
+    text-align: left;
+}
+.detailsFooter button{
+    height: 30px;
+    width: 60px;
+    position: fixed;
+    bottom:5%;
+    right: 5%;
+    background-color: rgb(201, 0, 0);
+    color: white;
+    border-color: rgb(201, 0, 0);
+    border-radius: 15px;
+}
+.detailsFooter button:hover{
+    background-color: rgb(145, 3, 3);
+    border-color: rgb(145, 3, 3);
+}

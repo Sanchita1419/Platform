@@ -1,0 +1,23 @@
+.start{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    
+}
+.form{
+    width: 25vw;
+    height: 40vh;
+    margin-top: 100px;
+    padding: 20px;
+    box-shadow: 0 0 15px -2px #444444;
+    align-items: center;
+    justify-content: center;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    align-items: center;
+}

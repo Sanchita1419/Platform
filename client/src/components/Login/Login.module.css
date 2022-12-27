@@ -1,0 +1,89 @@
+
+
+.app {
+    font-family: sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    
+    background-color: #f8f9fd;
+    position: relative;
+  }
+  .logo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 20px;
+    margin-left: 20px;
+    
+  }
+  .loginForm {
+    background-color: rgb(255, 255, 255);
+    padding: 2rem;
+    max-height: 50vh;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+ .loginForm input{
+    height: 35px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  .loginForm input:focus{
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  .linkContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .link{
+    text-decoration: none;
+    color: grey;
+  }
+  
+  /* button {
+    margin: 10px 0;
+    cursor: pointer;
+    font-size: 15px;
+    color: #fff;
+    padding: 10px 20px;
+    
+  } */
+  
+  /* button:hover {
+    background: #f67f2f;
+  } */
+  
+  .buttonContainer {
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  
+  /* .error {
+    color: red;
+    font-size: 12px;
+  }
+  
+  .title {
+    font-size: 25px;
+    margin-bottom: 20px;
+  } */
+  
+  .inputContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 10px;
+  }
+  .app p{
+    color: grey;
+  }
