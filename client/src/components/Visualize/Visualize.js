@@ -1,12 +1,10 @@
-import React, { useRef, useState } from "react";
-import DropdownButton from "../UI/DropdownButton";
 import HelpIcon from "@mui/icons-material/Help";
-import classes from "./Visualize.module.css";
-import GraphCard from "../UI/GraphCard";
-import ScatterChart from "../Chart/ScatterCharts";
-import Chart from "../Chart/Chart";
-import BarCharts from "../Chart/BarCharts";
+import React, { useRef } from "react";
 import BarChart2 from "../Chart/BarChart2";
+import BarCharts from "../Chart/BarCharts";
+import ScatterChart from "../Chart/ScatterCharts";
+import DropdownButton from "../UI/DropdownButton";
+import classes from "./Visualize.module.css";
 import VisualizeButtons from "./VisualizeButtons";
 
 const graphData = [
