@@ -4,7 +4,6 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const path = require("path");
 const dataRoute = require("./routes/data");
 const authRoute = require("./routes/auth");
 
@@ -21,12 +20,17 @@ mongoose
   .then(console.log("connected to MongoDB"))
   .catch((err) => console.log(err));
 
-// let gfs;
-// const conn = mongoose.createConnection(process.env.MONGO_URL)
-// conn.once("open", () => {
-//   gfs = Grid(conn.db, mongoose.mongo);
-//   gfs.collection("uploads");
-//   console.log("Connection Successful");
+// const customersdb = mongoose.createConnection(
+//   "mongodb://192.168.1.129:27017/customersdb",
+//   {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   }
+// );
+
+// const fpidb = mongoose.createConnection(process.env.MONGO_URL, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
 // });
 
 app.use("/api/data", dataRoute);

@@ -1,26 +1,31 @@
-.dd{
-    margin: 10px;
+.dd {
+  margin: 0 8px;
+  font-size: 0.8rem;
 }
-.ddToggle{
-    background-color: transparent;
-    color: #047baa;
-    border-color: #047baa;
-    width: 150px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 20px;
+.ddToggle {
+  background-color: transparent;
+  color: #114a62;
+  border-color: #114a62;
+  width: 100px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
 }
 .ddToggle:hover {
-    background-color: #047baa;
-    color: white;
+  background-color: #114a62;
+  color: white;
 }
 
-.ddToggle:focus{
-    background-color: #047baa;
-    color: white;
+.ddToggle:focus {
+  background-color: #114a62;
+  color: white;
 }
-.ddToggle:active{
-    background-color: #047baa;
-    color: white;
+.ddToggle:active {
+  background-color: #114a62;
+  color: white;
+}
+.ddItem:active {
+  background-color: #114a62;
 }

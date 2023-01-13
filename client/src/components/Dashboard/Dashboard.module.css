@@ -1,0 +1,9 @@
+.dashboardHeader {
+  display: flex;
+  justify-content: center;
+}
+.dashboardHeader button {
+  position: absolute;
+  top: 100px;
+  right: 100px;
+}

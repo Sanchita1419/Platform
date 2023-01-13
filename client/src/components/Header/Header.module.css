@@ -1,42 +1,45 @@
-.nav{
-    background: rgb(255, 250, 236);
-  height: 100px;
+.nav {
+  background: #114a62;
+  height: 80px;
   width: 100vw;
   display: flex;
   justify-content: space-between;
-  color: #f67f2f;
+  color: white;
+  width: 100vw;
 }
-.left{
-  flex: 3
+.left {
+  flex: 1;
 }
-.navMenu{
-    display: flex;
-    flex: 6;
+.navMenu {
+  display: flex;
+  flex: 8;
   align-items: center;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  margin-left: 20px;
 }
-.navLink{
-    color: #fc6500;
+.navLink {
+  color: white;
   display: flex;
   align-items: center;
   text-decoration: none;
   padding: 0 1.5rem;
   height: 100%;
   cursor: pointer;
+  margin: 15px 0;
 }
-.right{
+.right {
   display: flex;
-  flex:3;
+  flex: 3;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-.profile{
+.profile {
   display: flex;
   align-items: center;
   margin-right: 24px;
 }
-.navBtnLink{
+.navBtnLink {
   border-radius: 4px;
   background: #ffffff;
   padding: 10px 22px;
@@ -47,15 +50,24 @@
   transition: all 0.2s ease-in-out;
   text-decoration: none;
 }
-.details{
+.details {
   display: flex;
   flex-direction: column;
+  text-align: right;
 }
-.img{
+.img {
   border-radius: 50%;
-  height: 40px;
-  margin: 0 10px;
+  height: 38px;
+  margin: 0 0 0 10px;
 }
-.active{
+.active {
   text-decoration: underline;
+}
+.logo {
+  height: 100px;
+  position: absolute;
+  transform: translate(0%, 20%);
+}
+.nav .icon {
+  margin-right: 0.5rem;
 }

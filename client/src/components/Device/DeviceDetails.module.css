@@ -1,62 +1,109 @@
-.deviceDetails{
-    width: 70vw;
-    
-    margin: auto;
-    /* flex-direction: row;
-    flex: 6; */
-    
-    position: relative;
-}
-.addButton{
-    position: absolute;
-    bottom: 100%;
-}
-.column{
-    display: flex;
-    flex-direction: column;
-}
-.row{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.deviceDetails {
+  width: 70vw;
+  margin: auto;
+  position: relative;
+  display: flex;
+  flex-direction: row;
 }
 
-/* .column{
-    display: flex;
-    flex: 6;
-    justify-content: space-between;
-} */
-/* .leftContainer{
-    margin: 0 100px;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    flex: 6;
-} */
-/* .rightContainer{
-    margin: 0 100px;
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    flex: 6;
-} */
-/* .rightContainer button{
-    height: 35px;
-    width: 100px;
-} */
-.installButton{
-    height: 35px;
-    width: 100px;
-    color: white;
-    background-color: #2196f3;
-    border: 1px solid white;
-    border-radius: 25px;
-    transition: all .3s;
-    margin-left: 50px;
+/* .column {
+  display: flex;
+  flex-direction: column;
 }
-.installButton:hover{
-    box-shadow: rgba(255, 255, 255, .2) 0 3px 15px inset, rgba(0, 0, 0, .1) 0 3px 5px, rgba(0, 0, 0, .1) 0 10px 13px;
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+} */
+.column {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+  align-items: left;
+  justify-content: space-between;
+}
+.row {
+  margin: 10px 0;
+}
+.nameInput {
+  width: 150px;
+  border-radius: 20px;
+  border: 0.5px solid #114a62;
+  padding-left: 5px;
+}
+.nameInput:focus {
+  outline: none;
+  border: 0.5px solid #114a62;
+}
+.nameInput:focus::placeholder {
+  color: transparent;
+}
+.installButton {
+  height: 35px;
+  width: 100px;
+  color: white;
+  background-color: #114a62;
+  border: 1px solid white;
+  border-radius: 25px;
+  transition: all 0.3s;
+  /* margin-left: 50px; */
+}
+.installButton:hover {
+  box-shadow: rgba(255, 255, 255, 0.2) 0 3px 15px inset,
+    rgba(0, 0, 0, 0.1) 0 3px 5px, rgba(0, 0, 0, 0.1) 0 10px 13px;
   transform: scale(1.05);
-  background-color: #0b8df7;
+  background-color: #0e3d52;
+}
+.progressColor {
+  background-color: #114a62;
+}
+.statusButton {
+  border: none;
+  color: #455e60;
+  border-radius: 8px;
+  cursor: default;
+}
+.stop {
+  background-color: rgb(245, 149, 149);
+}
+.running {
+  background-color: rgb(108, 250, 108);
+}
+.detailsTable {
+  margin: 35px 35px;
+}
+.deviceDetailsTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 15px 0;
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.deviceDetailsTable thead tr {
+  background-color: #114a62;
+  color: #ffffff;
+  text-align: center;
+}
+.deviceDetailsTable th,
+td {
+  padding: 12px 10px;
+}
+.deviceDetailsTable tbody tr {
+  border-bottom: 1px solid #dddddd;
+  text-align: center;
+}
+.deviceDetailsTable thead th:first-child {
+  text-align: left;
+}
+
+.deviceDetailsTable tbody td:first-child {
+  text-align: left;
+}
+.deviceDetailsTable tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.deviceDetailsTable tbody tr:last-of-type {
+  border-bottom: 2px solid #114a62;
 }

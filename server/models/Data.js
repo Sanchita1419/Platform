@@ -1,27 +1,18 @@
 const mongoose = require("mongoose");
 
-const url = 'https://t4.ftcdn.net/jpg/04/21/43/95/360_F_421439576_zzg0kGw1QZ6S6WDAS4qgglRPP4wxddjS.jpg'
-const DataSchema = new mongoose.Schema(
-    {
-        name:{
-            type: String,
-            required: true
-        },
-        // name2:{
-        //     type: String,
-        //     default:"name2"
-        // },
-        img: {
-            data: Buffer,
-            contentType: String
-        },
-        // img2: {
-        //     data: Buffer,
-        //     contentType: String,
-        // }
-        
-    },
-    {timestamps:true}
-);
+const DataSchema = new mongoose.Schema({
+  device_id: { type: String },
+  date: { type: Date },
+  time: { type: Date },
+  inspector_name: { type: String },
+  part_no: { type: Number },
+  defect_class: { type: Array },
+  defect_size: { type: Array },
+  cpu_usage: { type: Number },
+  ram_usage: { type: Number },
+  lowlight_image: { type: Buffer },
+  whitelight_image: { type: Buffer },
+  contoured_image: { type: Buffer },
+});
 
 module.exports = mongoose.model("Data", DataSchema);

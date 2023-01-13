@@ -1,6 +1,8 @@
-.deviceHeader {
-  height: 100px;
-  position: relative;
+.visualize {
+  width: 100vw;
+}
+.visualizeHeader {
+  width: 100vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -9,32 +11,55 @@
   display: flex;
   justify-content: end;
   align-items: center;
-  margin: 15px 0;
-  /* align-items: center; */
   position: absolute;
   right: 0;
+  margin: 15px 0;
 }
-/* .deviceHeader h2 {
-  font-family: "Roboto", sans-serif;
-  color: #2196f3;
-} */
-.addButton {
-  position: absolute;
-  top: 20px;
-  right: 380px;
-  cursor: pointer;
+.visualizeConatiner {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
 }
-.add {
-  width: 100px;
-  height: 30px;
-  background-color: #114a62;
-  color: white;
-  border: none;
+.visualize .row {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+.graphContainer {
+  margin: 10px;
+  height: 400px;
+  width: 600px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
 }
-.add:hover {
-  transform: scale(1.02);
-  background-color: #114a62;
+.graphContainer h3 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  margin-top: 5px;
+  color: #455e60;
+}
+.visualizeButtonContainer {
+  width: 152px;
+  position: absolute;
+  right: 4%;
+  bottom: 4%;
+}
+.totalParts {
+  height: 150px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  font-size: 3rem;
+  margin-top: 80px;
+  color: #455e60;
 }
 /* The switch - the box around the slider */
 .switch {
@@ -42,7 +67,7 @@
   display: inline-block;
   width: 50px;
   height: 30px;
-  margin: 0 15px;
+  margin: 20px 15px;
 }
 
 /* Hide default HTML checkbox */
@@ -78,11 +103,11 @@
 }
 
 input:checked + .slider {
-  background-color: #114a62;
+  background-color: #f6932f;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #114a62;
+  box-shadow: 0 0 1px #f6932f;
 }
 
 input:checked + .slider:before {

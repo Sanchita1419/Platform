@@ -23,13 +23,12 @@ const ButtonContainer = (props) => {
     console.log("starting");
 
     //Send post request to fpi
-    try{
-
+    try {
       const response = await fetch("http://172.17.0.2:5500/start", {
         method: "post",
       });
       console.log(response);
-    } catch(err){
+    } catch (err) {
       console.log(err);
     }
 
@@ -48,7 +47,6 @@ const ButtonContainer = (props) => {
     console.log(imgStr);
     dispatch(dataActions.setImage(imgStr));
   };
-
 
   const handleReset = () => {
     console.log("Reseting");
@@ -75,8 +73,8 @@ const ButtonContainer = (props) => {
       />
       <Button
         name="Report"
-        bgcolor="blue"
-        bordercolor="blue"
+        bgcolor="#114A62"
+        bordercolor="#114A62"
         onClick={handleReport}
       />
     </div>

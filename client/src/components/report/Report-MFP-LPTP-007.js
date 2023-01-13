@@ -9,7 +9,6 @@ import Frame3 from "../../images/Frame3.jpg";
 import DropdownButton from "../UI/DropdownButton";
 import FilterButton from "../UI/FilterButton";
 import classes from "./Report.module.css";
-import Select from "react-select";
 
 const data = [
   {
@@ -64,16 +63,15 @@ const Report = (props) => {
         <h2>Results and Reports</h2>
       </div>
       <div className={classes.dropdownContainer}>
-        <DropdownButton
+        {/* <DropdownButton
           width="100px"
           name="Plant"
           actions={["Plant", "Plant 1", "Plant 2", "Plant 3"]}
-        />
-        {/* <FilterButton
+        /> */}
+        <FilterButton
           name="Plant"
           actions={["Plant", "Plant 1", "Plant 2", "Plant 3"]}
-        /> */}
-        {/* <Select options={options} /> */}
+        />
         <DropdownButton
           width="100px"
           name="Line"

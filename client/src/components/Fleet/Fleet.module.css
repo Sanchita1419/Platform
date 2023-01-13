@@ -1,33 +1,32 @@
-.fleet{
-    margin: auto;
-    margin-top: 15px;
-    position: relative;
-    height: 80vh;
-    
+.fleet {
+  margin: auto;
+  margin-top: 15px;
+  position: relative;
+  height: 80vh;
 }
-.fleetCardContainer{
-    position: absolute;
-    left:30%;
-    top: 30%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.fleetCardContainer {
+  position: absolute;
+  left: 30%;
+  top: 30%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.fleetCard{
-    height: 90px;
-    width: 170px;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    border-radius: 10px;
-    margin: 10px;
-    text-align: center;
-    justify-content: center;
-    padding-top: 20px;
-    transition: 0.3s;
-    cursor: pointer;
-    color: rgb(97, 150, 247);
-    font-size: 1.2rem;
+.fleetCard {
+  height: 90px;
+  width: 170px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  margin: 10px;
+  text-align: center;
+  justify-content: center;
+  padding-top: 20px;
+  transition: 0.3s;
+  cursor: pointer;
+  color: #114a62;
+  font-size: 1.2rem;
 }
-.fleetCard:hover{
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    transform: scale(1.10);
+.fleetCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
 }

@@ -1,0 +1,37 @@
+.filterSelect {
+  width: 100px;
+  height: 30px;
+  border-radius: 20px;
+  border: 0.5px solid #114a62;
+  background-color: transparent;
+  color: #114a62;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6px;
+}
+.filterSelect:active {
+  border: 0.5px solid #114a62;
+}
+.filterSelect select {
+  display: none;
+}
+.filterSelect select-selected {
+  background-color: red;
+}
+.filterSelect:hover {
+  background-color: #114a62;
+  color: white;
+}
+.filterOption {
+  background-color: white;
+  border-radius: 20px;
+  color: #114a62;
+}
+.filterOption:checked {
+  background-color: #114a62;
+}
+.filterOption:hover {
+  background-color: #114a62;
+  color: white;
+}

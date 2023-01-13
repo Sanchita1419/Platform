@@ -4,9 +4,9 @@ import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import SettingsIcon from "@mui/icons-material/Settings";
 import StorageIcon from "@mui/icons-material/Storage";
 import TabletAndroidIcon from "@mui/icons-material/TabletAndroid";
-import { ListItemIcon } from "@mui/material";
+import SignalCellularAltIcon from "@mui/icons-material/SignalCellularAlt";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "./Device.module.css";
 import DeviceHeader from "./DeviceHeader";
 const data = [
@@ -36,65 +36,46 @@ const data = [
     icon: <MonetizationOnIcon />,
   },
 ];
-const deviceInfo=[{
-  deviceid: "123",
-  name:"NVIDIA Orin #1 (Fluroscent Penetrant Inspection)",
-  cost: 312
-},
-{
-  deviceid: "123",
-  name:"NVIDIA Orin #1 (Fluroscent Penetrant Inspection)",
-  cost: 312
-},
-]
-const totalCost = deviceInfo.reduce((total, obj)=>(obj.cost +total),0)
+const deviceInfo = [
+  {
+    deviceid: "123",
+    name: "NVIDIA Orin #1 (Fluroscent Penetrant Inspection)",
+    type: "FPI",
+    state: "Stopped",
+  },
+  {
+    deviceid: "123",
+    type: "FPI",
+    name: "NVIDIA Orin #1 (Fluroscent Penetrant Inspection)",
+    state: "Running",
+  },
+];
+const totalCost = deviceInfo.reduce((total, obj) => obj.cost + total, 0);
 console.log(totalCost);
 const Device = () => {
-  const [active, setActive] = useState(false);
-  const toggleActive = () => {
-    setActive(!active);
-  };
-  console.log(active);
-  const activeClass = active ? classes.isActive : "";
-  const handleClick=()=>{
-    console.log("clicked");
-  }
+  // const [active, setActive] = useState(false);
+  const navigate = useNavigate();
+  // const toggleActive = () => {
+  //   setActive(!active);
+  // };
+  // console.log(active);
+  // const activeClass = active ? classes.isActive : "";
+
+  // const showDetailHandler = (id, deviceType) => {
+  //   console.log("clicked");
+  //   navigate(`/fleet/devicemanagement/${id}`, {
+  //     state: { type: deviceType, viewMode: active },
+  //   });
+  // };
   return (
     <div className={classes.device}>
       <DeviceHeader />
 
-      {/* <div
-          className={`${classes.dropdown} ${activeClass}`}
-          onClick={toggleActive}
-        >
-          Plant
-          <ul className={classes.dropdownList}>
-            <li>
-              <label>
-                <input type="checkbox" value="" name="" />
-                Action 1
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" value="" name="" />
-                Action 2
-              </label>
-            </li>
-            <li>
-              <label>
-                <input type="checkbox" value="" name="" />
-                Action 3
-              </label>
-            </li>
-          </ul>
-        </div> */}
-
-      <div className={classes.deviceCardContainer}>
+      {/* <div className={classes.deviceCardContainer}>
         {data.map((D) => (
           <div key={D.name} className={classes.deviceCard}>
             <p className={classes.name}>
-              <ListItemIcon style={{ minWidth: "35px", color: "#2196F3" }}>
+              <ListItemIcon style={{ minWidth: "35px", color: "#114A62" }}>
                 {D.icon}
               </ListItemIcon>
               {D.name}
@@ -102,41 +83,75 @@ const Device = () => {
             <p className={classes.value}>{D.value}</p>
           </div>
         ))}
-      </div>
+      </div> */}
+
       <div className={classes.table}>
-        <table>
-          <tr>
-            <th>Subscriptions</th>
-            <th></th>
-            <th>Usage</th>
-          </tr>
-          {deviceInfo.map(d=>(
-          <tr key={d.deviceid}>
-            <td>{d.name}</td>
-            <td>
-            <Link style={{textDecoration: "none", color:"black"}} to={`/fleet/devicemanagement/${d.deviceid}`}>
-
-              <SettingsIcon style={{cursor:"pointer"}} />
-            </Link>
-            </td>
-            <td>${d.cost} per month</td>
-          </tr>
-          ))}
-          {/* <tr>
-            <td>NVIDIA Orin #1 (Fluroscent Penetrant Inspection)</td>
-            <td>
-            <Link to={`/fleet/devicemanagement/${}`}>
-
-              <SettingsIcon style={{cursor:"pointer"}} />
-            </Link>
-            </td>
-            <td>$312 per month</td>
-          </tr> */}
-          <tr style={{ color: "red" }}>
-            <td></td>
-            <td>Total cost</td>
-            <td>${totalCost} per month</td>
-          </tr>
+        <table className={classes.deviceTable}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>State</th>
+              <th>Metric</th>
+              <th>Config</th>
+              <th>Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            {deviceInfo.map((d) => (
+              <tr key={d.deviceid}>
+                <td>{d.name}</td>
+                <td>
+                  <button
+                    className={`${classes.stateButton} ${
+                      d.state === "Stopped" ? classes.stop : classes.running
+                    }`}
+                  >
+                    {d.state}
+                  </button>
+                </td>
+                <td>
+                  <SignalCellularAltIcon />
+                </td>
+                <td>
+                  <Link
+                    style={{ textDecoration: "none", color: "#114A62" }}
+                    to={`/fleet/devicemanagement/${d.deviceid}`}
+                    state={{ type: d.type, name: d.name }}
+                  >
+                    <SettingsIcon style={{ cursor: "pointer" }} />
+                  </Link>
+                  {/* <SettingsIcon
+                    style={{ cursor: "pointer" }}
+                    onClick={showDetailHandler(d.deviceid, d.type)}
+                  /> */}
+                </td>
+                <td className={classes.operationButtons}>
+                  <div className={classes.buttonGroup}>
+                    <button style={{ backgroundColor: "rgb(139, 211, 211)" }}>
+                      Start
+                    </button>
+                    <button style={{ backgroundColor: "rgb(127, 240, 197)" }}>
+                      Restart
+                    </button>
+                    <button style={{ backgroundColor: "rgb(255, 218, 218)" }}>
+                      Stop
+                    </button>
+                  </div>
+                  <div className={classes.buttonGroup}>
+                    <button style={{ backgroundColor: "rgb(177, 182, 255)" }}>
+                      Assign
+                    </button>
+                    <button style={{ backgroundColor: "rgb(198, 177, 255)" }}>
+                      Remove
+                    </button>
+                    <button style={{ backgroundColor: "rgb(254, 255, 177)" }}>
+                      Upgrade
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
     </div>

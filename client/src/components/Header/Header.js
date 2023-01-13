@@ -5,68 +5,88 @@ import SearchIcon from "@mui/icons-material/Search";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import AssignmentIcon from "@mui/icons-material/Assignment";
 import logoImage from "../../images/LOGO.png";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import PieChartIcon from "@mui/icons-material/PieChart";
 import StorageIcon from "@mui/icons-material/Storage";
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 
 const Header = () => {
   return (
     <div className={classes.nav}>
       <div className={classes.left}>
         <NavLink to="/" className={classes.navLink}>
-          <img src={logoImage} alt="logo" />
+          <img src={logoImage} className={classes.logo} alt="logo" />
         </NavLink>
       </div>
       <div className={classes.navMenu}>
         <NavLink
           to="/"
           style={({ isActive }) => ({
-            color: isActive ? "#fc6500" : "#f67f2f",
-            textDecoration: isActive ? "underline" : "none",
+            color: isActive ? "rgb(231, 231, 231)" : "white",
+            borderBottom: isActive ? "2px solid white" : "none",
           })}
           className={classes.navLink}
         >
-          <BarChartIcon />
+          <BarChartIcon className={classes.icon} />
           Dashboard
         </NavLink>
         <NavLink
           to="/visualization"
           style={({ isActive }) => ({
-            color: isActive ? "#fc6500" : "#f67f2f",
-            textDecoration: isActive ? "underline" : "none",
+            color: isActive ? "rgb(231, 231, 231)" : "white",
+            borderBottom: isActive ? "2px solid white" : "none",
           })}
           className={classes.navLink}
         >
-          <PieChartIcon />
+          <PieChartIcon className={classes.icon} />
           Visualization
         </NavLink>
         <NavLink
           to="/fleet"
           style={({ isActive }) => ({
-            color: isActive ? "#fc6500" : "#f67f2f",
-            textDecoration: isActive ? "underline" : "none",
+            color: isActive ? "rgb(231, 231, 231)" : "white",
+            borderBottom: isActive ? "2px solid white" : "none",
           })}
           className={classes.navLink}
         >
-          <StorageIcon />
+          <StorageIcon className={classes.icon} />
           Fleet Management
+        </NavLink>
+        <NavLink
+          to="/subscription"
+          style={({ isActive }) => ({
+            color: isActive ? "rgb(231, 231, 231)" : "white",
+            borderBottom: isActive ? "2px solid white" : "none",
+          })}
+          className={classes.navLink}
+        >
+          <LocalOfferIcon className={classes.icon} />
+          Subscriptions
+        </NavLink>
+        <NavLink
+          to="/reports"
+          style={({ isActive }) => ({
+            color: isActive ? "rgb(231, 231, 231)" : "white",
+            borderBottom: isActive ? "2px solid white" : "none",
+          })}
+          className={classes.navLink}
+        >
+          <AssignmentIcon className={classes.icon} />
+          Reports
         </NavLink>
       </div>
       <div className={classes.right}>
         <div>
-          <SearchIcon style={{ color: "#f67f2f", marginRight: "0.5rem" }} />
-          <ChatBubbleOutlineIcon
-            style={{ color: "#f67f2f", marginRight: "0.5rem" }}
-          />
-          <NotificationsIcon
-            style={{ color: "#f67f2f", marginRight: "0.5rem" }}
-          />
+          <SearchIcon className={classes.icon} />
+          <ChatBubbleOutlineIcon className={classes.icon} />
+          <NotificationsIcon className={classes.icon} />
         </div>
         <div className={classes.profile}>
           <div className={classes.details}>
-            <span>Name</span>
-            <span>Details</span>
+            <span>Someone</span>
+            <span style={{ fontSize: "0.8rem" }}>IT Admin</span>
           </div>
 
           <img
