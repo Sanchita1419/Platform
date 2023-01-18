@@ -38,13 +38,20 @@ const deviceData = {
   actions: ["Device 1", "Device 2", "Device 3"],
 };
 const Visualize = () => {
-  const [value, setValue] = useState("");
-  const [filters, handleFilters] = useState({});
-  const sendValue = (value) => {
-    setValue(value);
-    console.log(value);
-  };
+  // const [value, setValue] = useState("");
+  const [filters, setFilters] = useState({});
   const scatterRef = useRef();
+  const handleFilter = (name, value) => {
+    setFilters({ ...filters, [name]: value });
+  };
+
+  const sendValue = (value, name) => {
+    handleFilter(name, value);
+    console.log(value);
+    console.log(name);
+  };
+
+  console.log(filters);
   return (
     <div className={classes.visualize}>
       <div className={classes.visualizeHeader}>

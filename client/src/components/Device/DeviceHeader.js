@@ -11,12 +11,18 @@ const lineData = {
   actions: ["Line 1", "Line 2", "Line 3"],
 };
 const DeviceHeader = (props) => {
-  const [value, setValue] = useState("");
-  const [filters, handleFilters] = useState({});
-  const sendValue = (value) => {
-    setValue(value);
-    console.log(value);
+  // const [value, setValue] = useState("");
+  const [filters, setFilters] = useState({});
+  const handleFilter = (name, value) => {
+    setFilters({ ...filters, [name]: value });
   };
+
+  const sendValue = (value, name) => {
+    handleFilter(name, value);
+    console.log(value);
+    console.log(name);
+  };
+  console.log(filters);
   return (
     <div className={classes.deviceHeader}>
       <div className={classes.addButton}>

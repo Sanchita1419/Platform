@@ -40,12 +40,17 @@ const DeviceDetails = (props) => {
   const location = useLocation();
   // const deviceType = location.state.type;
   // const deviceName = location.state.name;
-  const [value, setValue] = useState("");
-  const [filters, handleFilters] = useState({});
-  const sendValue = (value) => {
-    setValue(value);
-    console.log(value);
+  const [filters, setFilters] = useState({});
+  const handleFilter = (name, value) => {
+    setFilters({ ...filters, [name]: value });
   };
+
+  const sendValue = (value, name) => {
+    handleFilter(name, value);
+    console.log(value);
+    console.log(name);
+  };
+  console.log(filters);
   return (
     <>
       {props.viewMode ? (

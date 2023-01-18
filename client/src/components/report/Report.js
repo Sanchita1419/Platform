@@ -64,12 +64,22 @@ const granularityData = {
 };
 const Report = (props) => {
   const [reportData, setReportData] = useState([]);
-  const [value, setValue] = useState("");
-  const [filters, handleFilters] = useState({});
-  const sendValue = (value) => {
-    setValue(value);
-    console.log(value);
+  const [filteredData, setFilteredData] = useState([]);
+
+  // const [value, setValue] = useState("");
+  const [filters, setFilters] = useState({});
+  const handleFilter = (name, value) => {
+    setFilters({ ...filters, [name]: value });
   };
+
+  const sendValue = (value, name) => {
+    handleFilter(name.toLowerCase(), value);
+    console.log(value);
+    console.log(name);
+  };
+  console.log(filters);
+
+  /* UseEffect for fetching */
   useEffect(() => {
     const fetchData = async () => {
       const response = await axiosInstance.get("/data");
@@ -78,7 +88,28 @@ const Report = (props) => {
     };
     fetchData();
   }, []);
-  console.log("reportData: " + reportData);
+  console.log(reportData);
+  /* UseEffect for filtering */
+
+  useEffect(() => {
+    // setFilteredData(
+    //   reportData.filter((item) => {
+    //     Object.entries(filters).every(([key, value]) =>
+    //       item[key].includes(value)
+    //     );
+    //   })
+    // );
+    const newData = reportData.filter((item) => {
+      for (var key in filters) {
+        if (item[key] === undefined || item[key] !== filters[key]) return false;
+      }
+      return true;
+    });
+    setFilteredData(newData);
+    console.log(newData);
+  }, [reportData, filters]);
+
+  console.log("Filtered: " + filteredData);
   // const handleCloseReport = () => {
   //   props.onConfirm();
   // };
@@ -103,11 +134,6 @@ const Report = (props) => {
       </div>
       <div className={classes.dropdownContainer}>
         <DropdownButtons width="100px" data={plantData} sendValue={sendValue} />
-        {/* <FilterButton
-          name="Plant"
-          actions={["Plant", "Plant 1", "Plant 2", "Plant 3"]}
-        /> */}
-        {/* <Select options={options} /> */}
         <DropdownButtons width="100px" data={lineData} sendValue={sendValue} />
         <DropdownButtons
           width="120px"
@@ -145,8 +171,8 @@ const Report = (props) => {
             <th>THUMBNAIL</th>
             <th>COMMENTS</th>
           </tr>
-          {reportData.map((d) => (
-            <tr key={d.par_no}>
+          {filteredData.map((d) => (
+            <tr key={d.part_no}>
               <td>{d.plant}</td>
               <td>{d.line}</td>
               <td>{d.part_no}</td>
