@@ -2,8 +2,10 @@ const mongoose = require("mongoose");
 
 const DataSchema = new mongoose.Schema({
   device_id: { type: String },
+  plant: { type: String },
+  line: { type: String },
   date: { type: Date },
-  time: { type: Date },
+  time: { type: String },
   inspector_name: { type: String },
   part_no: { type: Number },
   defect_class: { type: Array },
@@ -13,6 +15,7 @@ const DataSchema = new mongoose.Schema({
   lowlight_image: { type: Buffer },
   whitelight_image: { type: Buffer },
   contoured_image: { type: Buffer },
+  status: { type: String },
 });
 
 module.exports = mongoose.model("Data", DataSchema);

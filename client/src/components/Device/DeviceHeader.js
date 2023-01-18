@@ -1,5 +1,5 @@
 import React from "react";
-import DropdownButton from "../UI/DropdownButton";
+import DropdownButtons from "../UI/DropdownButtons";
 import HelpIcon from "@mui/icons-material/Help";
 import classes from "./DeviceHeader.module.css";
 const DeviceHeader = (props) => {
@@ -16,11 +16,11 @@ const DeviceHeader = (props) => {
       </div>
       <h2>Device Management</h2>
       <div className={classes.buttonContainer}>
-        <DropdownButton
+        <DropdownButtons
           name="Plant"
           actions={["Plant 1", "Plant 2", "Plant 3"]}
         />
-        <DropdownButton name="Line" actions={["Line 1", "Line 2", "Line 3"]} />
+        <DropdownButtons name="Line" actions={["Line 1", "Line 2", "Line 3"]} />
         {props.toggleIsActive && (
           <label className={classes.switch}>
             <input type="checkbox" />

@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../UI/Button";
-import DropdownButton from "../UI/DropdownButton";
+import DropdownButtons from "../UI/DropdownButtons";
 import Input from "../UI/Input";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import classes from "./DeviceDetails.module.css";
@@ -86,21 +86,21 @@ const DeviceDetails = (props) => {
         <div className={classes.deviceDetails}>
           <div className={classes.column}>
             <div className={classes.row}>
-              <DropdownButton
+              <DropdownButtons
                 name={deviceType}
                 width="130px"
                 actions={["device 1", "device 2"]}
               />
             </div>
             <div className={classes.row}>
-              <DropdownButton
+              <DropdownButtons
                 name="Accessory"
                 width="130px"
                 actions={["Accessory 1", "Accessory 2"]}
               />
             </div>
             <div className={classes.row}>
-              <DropdownButton
+              <DropdownButtons
                 name="Application"
                 width="130px"
                 actions={["Application 1", "Application 2"]}

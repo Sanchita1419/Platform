@@ -6,7 +6,7 @@ import Frame0 from "../../images/Frame0.jpg";
 import Frame1 from "../../images/Frame1.jpg";
 import Frame2 from "../../images/Frame2.jpg";
 import Frame3 from "../../images/Frame3.jpg";
-import DropdownButton from "../UI/DropdownButton";
+import DropdownButtons from "../UI/DropdownButtons";
 import FilterButton from "../UI/FilterButton";
 import classes from "./Report.module.css";
 
@@ -63,7 +63,7 @@ const Report = (props) => {
         <h2>Results and Reports</h2>
       </div>
       <div className={classes.dropdownContainer}>
-        {/* <DropdownButton
+        {/* <DropdownButtons
           width="100px"
           name="Plant"
           actions={["Plant", "Plant 1", "Plant 2", "Plant 3"]}
@@ -72,22 +72,22 @@ const Report = (props) => {
           name="Plant"
           actions={["Plant", "Plant 1", "Plant 2", "Plant 3"]}
         />
-        <DropdownButton
+        <DropdownButtons
           width="100px"
           name="Line"
           actions={["Line 1", "Line 2", "Line 3"]}
         />
-        <DropdownButton
+        <DropdownButtons
           width="120px"
           name="Part No."
           actions={["1", "2", "3"]}
         />
-        <DropdownButton
+        <DropdownButtons
           width="150px"
           name="Date Range"
           actions={["Past 2 days", "Past 5 days", "Past 10 days"]}
         />
-        <DropdownButton
+        <DropdownButtons
           width="150px"
           name="Granularity"
           actions={["Granularity 1", "Granularity 2", "Granularity 3"]}
