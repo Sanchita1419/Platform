@@ -59,33 +59,6 @@ const Subscription = () => {
     <div className={classes.subscription}>
       <SubscriptionHeader />
 
-      {/* <div
-              className={`${classes.dropdown} ${activeClass}`}
-              onClick={toggleActive}
-            >
-              Plant
-              <ul className={classes.dropdownList}>
-                <li>
-                  <label>
-                    <input type="checkbox" value="" name="" />
-                    Action 1
-                  </label>
-                </li>
-                <li>
-                  <label>
-                    <input type="checkbox" value="" name="" />
-                    Action 2
-                  </label>
-                </li>
-                <li>
-                  <label>
-                    <input type="checkbox" value="" name="" />
-                    Action 3
-                  </label>
-                </li>
-              </ul>
-            </div> */}
-
       <div className={classes.subscriptionCardContainer}>
         {data.map((D) => (
           <div

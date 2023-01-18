@@ -2,14 +2,16 @@ import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import classes from "./DropdownButtons.module.css";
-const DropdownButtons = (props) => {
-  const [title, setTitle] = useState(props.name);
+const DropdownButtons = ({ data, width, sendValue }) => {
+  const [title, setTitle] = useState(data.name);
   const [value, setValue] = useState("");
-  const handleSelect = (e) => {
-    console.log(e);
-    setValue(e);
-    setTitle(e);
-  };
+
+  // const handleSelect = (e) => {
+  //   console.log(e);
+  //   // setValue(e);
+  //   sendValue(e);
+  //   setTitle(e);
+  // };
   return (
     // <Dropdown className={classes.dd}>
     //   <Dropdown.Toggle
@@ -36,12 +38,16 @@ const DropdownButtons = (props) => {
     // </Dropdown>
 
     <DropdownButton
-      style={{ width: `${props.width}` }}
+      style={{ width: `${width}` }}
       className={classes.ddButton}
       title={title}
-      onSelect={handleSelect}
+      name={data.name}
+      // onSelect={handleSelect}
+      onSelect={(e) => {
+        sendValue(e, data.name);
+      }}
     >
-      {props.actions.map((action) => (
+      {data.actions.map((action) => (
         <Dropdown.Item className={classes.ddItem} eventKey={action}>
           {action}
         </Dropdown.Item>

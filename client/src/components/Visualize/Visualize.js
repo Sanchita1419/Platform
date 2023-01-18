@@ -1,5 +1,5 @@
 import HelpIcon from "@mui/icons-material/Help";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import BarChart2 from "../Chart/BarChart2";
 import BarCharts from "../Chart/BarCharts";
 import ScatterChart from "../Chart/ScatterCharts";
@@ -25,26 +25,34 @@ const graphData = [
     value: 30,
   },
 ];
-
+const plantData = {
+  name: "Plant",
+  actions: ["Plant 1", "Plant 2", "Plant 3"],
+};
+const lineData = {
+  name: "Line",
+  actions: ["Line 1", "Line 2", "Line 3"],
+};
+const deviceData = {
+  name: "Device",
+  actions: ["Device 1", "Device 2", "Device 3"],
+};
 const Visualize = () => {
+  const [value, setValue] = useState("");
+  const [filters, handleFilters] = useState({});
+  const sendValue = (value) => {
+    setValue(value);
+    console.log(value);
+  };
   const scatterRef = useRef();
   return (
     <div className={classes.visualize}>
       <div className={classes.visualizeHeader}>
         <h2>Visualization</h2>
         <div className={classes.buttonContainer}>
-          <DropdownButtons
-            name="Plant"
-            actions={["Plant 1", "Plant 2", "Plant 3"]}
-          />
-          <DropdownButtons
-            name="Line"
-            actions={["Line 1", "Line 2", "Line 3"]}
-          />
-          <DropdownButtons
-            name="Device"
-            actions={["Device 1", "Device 2", "Device 3"]}
-          />
+          <DropdownButtons data={plantData} sendValue={sendValue} />
+          <DropdownButtons data={lineData} sendValue={sendValue} />
+          <DropdownButtons data={deviceData} sendValue={sendValue} />
           <HelpIcon
             style={{ color: "#114A62", margin: "0 15px", fontSize: "2.2rem" }}
           />

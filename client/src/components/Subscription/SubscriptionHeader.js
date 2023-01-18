@@ -1,10 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import DropdownButtons from "../UI/DropdownButtons";
 import HelpIcon from "@mui/icons-material/Help";
 import classes from "./SubscriptionHeader.module.css";
 import Button from "../UI/Button";
-
+const plantData = {
+  name: "Plant",
+  actions: ["Plant 1", "Plant 2", "Plant 3"],
+};
+const lineData = {
+  name: "Line",
+  actions: ["Line 1", "Line 2", "Line 3"],
+};
 const SubscriptionHeader = (props) => {
+  const [value, setValue] = useState("");
+  const [name, setName] = useState("");
+
+  const [filters, setFilters] = useState({});
+  const handleFilter = (name, value) => {
+    setFilters({ ...filters, [name]: value });
+  };
+  // const sendName = (name) => {
+  //   console.log(name);
+  //   // setName(value);
+  // };
+  const sendValue = (value, name) => {
+    // setValue(value);
+    // setName(name);
+    handleFilter(name, value);
+    console.log(value);
+    console.log(name);
+  };
+  console.log(filters);
   return (
     <div className={classes.subscriptionHeader}>
       <div className={classes.addButton}>
@@ -14,11 +40,22 @@ const SubscriptionHeader = (props) => {
       </div>
       <h2>Active Subscriptions</h2>
       <div className={classes.buttonContainer}>
-        <DropdownButtons
+        {/* <DropdownButtons
           name="Plant"
           actions={["Plant 1", "Plant 2", "Plant 3"]}
+          sendValue={sendValue}
+        /> */}
+        <DropdownButtons
+          data={plantData}
+          sendValue={sendValue}
+          name={plantData.name}
+          // onSelect={handleFilter}
         />
-        <DropdownButtons name="Line" actions={["Line 1", "Line 2", "Line 3"]} />
+        <DropdownButtons
+          data={lineData}
+          sendValue={sendValue}
+          // onSelect={handleFilter(lineData)}
+        />
         <label className={classes.switch}>
           <input type="checkbox" />
           <span className={`${classes.slider} ${classes.round}`}></span>

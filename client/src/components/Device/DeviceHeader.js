@@ -1,8 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import DropdownButtons from "../UI/DropdownButtons";
 import HelpIcon from "@mui/icons-material/Help";
 import classes from "./DeviceHeader.module.css";
+const plantData = {
+  name: "Plant",
+  actions: ["Plant 1", "Plant 2", "Plant 3"],
+};
+const lineData = {
+  name: "Line",
+  actions: ["Line 1", "Line 2", "Line 3"],
+};
 const DeviceHeader = (props) => {
+  const [value, setValue] = useState("");
+  const [filters, handleFilters] = useState({});
+  const sendValue = (value) => {
+    setValue(value);
+    console.log(value);
+  };
   return (
     <div className={classes.deviceHeader}>
       <div className={classes.addButton}>
@@ -16,11 +30,8 @@ const DeviceHeader = (props) => {
       </div>
       <h2>Device Management</h2>
       <div className={classes.buttonContainer}>
-        <DropdownButtons
-          name="Plant"
-          actions={["Plant 1", "Plant 2", "Plant 3"]}
-        />
-        <DropdownButtons name="Line" actions={["Line 1", "Line 2", "Line 3"]} />
+        <DropdownButtons data={plantData} sendValue={sendValue} />
+        <DropdownButtons data={lineData} sendValue={sendValue} />
         {props.toggleIsActive && (
           <label className={classes.switch}>
             <input type="checkbox" />

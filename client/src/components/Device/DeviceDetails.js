@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../UI/Button";
 import DropdownButtons from "../UI/DropdownButtons";
 import Input from "../UI/Input";
@@ -15,7 +15,7 @@ const deviceDetailsData = [
     lastUsed: "10:00 am",
   },
   {
-    id: 123,
+    id: 124,
     name: "NVIDIA Orin #2 (Fluroscent Penetrant Inspection)",
     accessories: ["Accessory 4", "Accessory 5", "Accessory 6"],
     applications: ["Application 2", "Application 3"],
@@ -23,11 +23,29 @@ const deviceDetailsData = [
     lastUsed: "08:00 am",
   },
 ];
+const deviceData = {
+  name: "NVDIA",
+  actions: ["device 1", "device 2"],
+};
+const accessoryData = {
+  name: "Accessory",
+  actions: ["Accessory 1", "Accessory 2"],
+};
+const applicationData = {
+  name: "Application",
+  actions: ["Application 1", "Application 2"],
+};
 const DeviceDetails = (props) => {
   const params = useParams();
   const location = useLocation();
-  const deviceType = location.state.type;
-  const deviceName = location.state.name;
+  // const deviceType = location.state.type;
+  // const deviceName = location.state.name;
+  const [value, setValue] = useState("");
+  const [filters, handleFilters] = useState({});
+  const sendValue = (value) => {
+    setValue(value);
+    console.log(value);
+  };
   return (
     <>
       {props.viewMode ? (
@@ -47,7 +65,8 @@ const DeviceDetails = (props) => {
               <tbody>
                 <tr>
                   <td>{params.id}</td>
-                  <td>{deviceName}</td>
+                  {/* <td>{deviceName}</td> */}
+                  <td>{data.name}</td>
                   <td>
                     {data.accessories.map((d) => (
                       <>
@@ -87,24 +106,16 @@ const DeviceDetails = (props) => {
           <div className={classes.column}>
             <div className={classes.row}>
               <DropdownButtons
-                name={deviceType}
-                width="130px"
-                actions={["device 1", "device 2"]}
+                data={deviceData}
+                sendValue={sendValue}
+                style={{ width: "150px" }}
               />
             </div>
             <div className={classes.row}>
-              <DropdownButtons
-                name="Accessory"
-                width="130px"
-                actions={["Accessory 1", "Accessory 2"]}
-              />
+              <DropdownButtons data={accessoryData} sendValue={sendValue} />
             </div>
             <div className={classes.row}>
-              <DropdownButtons
-                name="Application"
-                width="130px"
-                actions={["Application 1", "Application 2"]}
-              />
+              <DropdownButtons data={applicationData} sendValue={sendValue} />
             </div>
           </div>
           <div className={classes.column}>

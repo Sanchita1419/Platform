@@ -21,7 +21,7 @@
 .addButton {
   position: absolute;
   top: 20px;
-  right: 380px;
+  left: 220px;
   cursor: pointer;
 }
 .add {

@@ -42,10 +42,34 @@ const dropdownData = [
     status: "Not OK",
   },
 ];
-
+const plantData = {
+  name: "Plant",
+  actions: ["Plant 1", "Plant 2", "Plant 3"],
+};
+const lineData = {
+  name: "Line",
+  actions: ["Line 1", "Line 2", "Line 3"],
+};
+const partNoData = {
+  name: "Part No.",
+  actions: ["1", "2", "3"],
+};
+const dateRangeData = {
+  name: "Date Range",
+  actions: ["Past 2 days", "Past 5 days", "Past 10 days"],
+};
+const granularityData = {
+  name: "Granularity",
+  actions: ["Granularity 1", "Granularity 2", "Granularity 3"],
+};
 const Report = (props) => {
   const [reportData, setReportData] = useState([]);
-  const [filters, setFilters] = useState({});
+  const [value, setValue] = useState("");
+  const [filters, handleFilters] = useState({});
+  const sendValue = (value) => {
+    setValue(value);
+    console.log(value);
+  };
   useEffect(() => {
     const fetchData = async () => {
       const response = await axiosInstance.get("/data");
@@ -54,18 +78,18 @@ const Report = (props) => {
     };
     fetchData();
   }, []);
-  console.log(reportData);
+  console.log("reportData: " + reportData);
   // const handleCloseReport = () => {
   //   props.onConfirm();
   // };
-  const handleFilters = (e) => {
-    const value = e.target.value;
-    console.log(value);
-    setFilters({
-      ...filters,
-      [e.target.name]: value,
-    });
-  };
+  // const handleFilters = (e) => {
+  //   const value = e.target.value;
+  //   console.log(value);
+  //   setFilters({
+  //     ...filters,
+  //     [e.target.name]: value,
+  //   });
+  // };
   return (
     <div className={classes.report}>
       <div className={classes.heading}>
@@ -78,36 +102,27 @@ const Report = (props) => {
         <h2>Results and Reports</h2>
       </div>
       <div className={classes.dropdownContainer}>
-        <DropdownButtons
-          width="100px"
-          name="Plant"
-          actions={["Plant", "Plant 1", "Plant 2", "Plant 3"]}
-          onChange={handleFilters}
-        />
+        <DropdownButtons width="100px" data={plantData} sendValue={sendValue} />
         {/* <FilterButton
           name="Plant"
           actions={["Plant", "Plant 1", "Plant 2", "Plant 3"]}
         /> */}
         {/* <Select options={options} /> */}
-        <DropdownButtons
-          width="100px"
-          name="Line"
-          actions={["Line 1", "Line 2", "Line 3"]}
-        />
+        <DropdownButtons width="100px" data={lineData} sendValue={sendValue} />
         <DropdownButtons
           width="120px"
-          name="Part No."
-          actions={["1", "2", "3"]}
+          data={partNoData}
+          sendValue={sendValue}
         />
         <DropdownButtons
           width="150px"
-          name="Date Range"
-          actions={["Past 2 days", "Past 5 days", "Past 10 days"]}
+          data={dateRangeData}
+          sendValue={sendValue}
         />
         <DropdownButtons
           width="150px"
-          name="Granularity"
-          actions={["Granularity 1", "Granularity 2", "Granularity 3"]}
+          data={granularityData}
+          sendValue={sendValue}
         />
       </div>
       <div className={classes.iconButtonContainer}>
