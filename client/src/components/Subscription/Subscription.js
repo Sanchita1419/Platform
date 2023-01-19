@@ -5,7 +5,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import StorageIcon from "@mui/icons-material/Storage";
 import TabletAndroidIcon from "@mui/icons-material/TabletAndroid";
 import { ListItemIcon } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import classes from "./Subscription.module.css";
 import SubscriptionHeader from "./SubscriptionHeader";
@@ -46,21 +46,37 @@ const deviceInfo = [
     name: "NVIDIA Orin #1 (Fluroscent Penetrant Inspection)",
     cost: 312,
   },
-  {
-    deviceid: "123",
-    name: "NVIDIA Orin #1 (Fluroscent Penetrant Inspection)",
-    cost: 312,
-  },
+  // {
+  //   deviceid: "123",
+  //   name: "NVIDIA Orin #1 (Fluroscent Penetrant Inspection)",
+  //   cost: 312,
+  // },
 ];
 const totalCost = deviceInfo.reduce((total, obj) => obj.cost + total, 0);
 console.log(totalCost);
 const Subscription = () => {
+  const [noOfService, setNoOfService] = useState(0);
+  const [eventAlerts, setEventAlerts] = useState(0);
+
+  // useEffect(() => {
+  //   fetch("url for no of service").then((response) => {
+  //     console.log(response);
+  //     setNoOfService(response);
+  //   });
+  // });
+
+  // useEffect(() => {
+  //   fetch("url for event alerts").then((response) => {
+  //     console.log(response);
+  //     setEventAlerts(eventAlerts+1);
+  //   });
+  // });
   return (
     <div className={classes.subscription}>
       <SubscriptionHeader />
 
       <div className={classes.subscriptionCardContainer}>
-        {data.map((D) => (
+        {/* {data.map((D) => (
           <div
             key={D.name}
             className={`${classes.subscriptionCard} ${
@@ -75,7 +91,53 @@ const Subscription = () => {
             </p>
             <p className={classes.value}>{D.value}</p>
           </div>
-        ))}
+        ))} */}
+
+        <div className={classes.subscriptionCard}>
+          <p className={classes.name}>
+            <ListItemIcon style={{ minWidth: "35px", color: "#114A62" }}>
+              <StorageIcon />
+            </ListItemIcon>
+            No. of services
+          </p>
+          <p className={classes.value}>{noOfService}</p>
+        </div>
+        <div className={`${classes.subscriptionCard} ${classes.disabled}`}>
+          <p className={classes.name}>
+            <ListItemIcon style={{ minWidth: "35px", color: "#114A62" }}>
+              <TabletAndroidIcon />
+            </ListItemIcon>
+            No. of Devices
+          </p>
+          <p className={classes.value}>2</p>
+        </div>
+        <div className={classes.subscriptionCard}>
+          <p className={classes.name}>
+            <ListItemIcon style={{ minWidth: "35px", color: "#114A62" }}>
+              <ClearIcon />
+            </ListItemIcon>
+            Event Alerts
+          </p>
+          <p className={classes.value}>{eventAlerts}</p>
+        </div>
+        <div className={`${classes.subscriptionCard} ${classes.disabled}`}>
+          <p className={classes.name}>
+            <ListItemIcon style={{ minWidth: "35px", color: "#114A62" }}>
+              <HourglassTopIcon />
+            </ListItemIcon>
+            Total Uptime
+          </p>
+          <p className={classes.value}>98%</p>
+        </div>
+        <div className={`${classes.subscriptionCard} ${classes.disabled}`}>
+          <p className={classes.name}>
+            <ListItemIcon style={{ minWidth: "35px", color: "#114A62" }}>
+              <MonetizationOnIcon />
+            </ListItemIcon>
+            Current month costs
+          </p>
+          <p className={classes.value}>$624.0</p>
+        </div>
       </div>
       <div className={classes.table}>
         <table>
@@ -95,7 +157,7 @@ const Subscription = () => {
                   <SettingsIcon style={{ cursor: "pointer" }} />
                 </Link>
               </td>
-              <td>${d.cost} per month</td>
+              <td className={classes.disabled}>${d.cost} per month</td>
             </tr>
           ))}
           {/* <tr>
@@ -111,7 +173,7 @@ const Subscription = () => {
           <tr style={{ color: "red" }}>
             <td></td>
             <td>Total cost</td>
-            <td>${totalCost} per month</td>
+            <td className={classes.disabled}>${totalCost} per month</td>
           </tr>
         </table>
       </div>

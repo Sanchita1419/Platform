@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const EdgeNodeOrinSchema = new mongoose.Schema({
+const EdgenodeOrinSchema = new mongoose.Schema({
   device_id: { type: String },
   date: { type: Date },
   time: { type: Date },
@@ -15,4 +15,4 @@ const EdgeNodeOrinSchema = new mongoose.Schema({
   contoured_image: { type: Buffer },
 });
 
-module.exports = mongoose.model("EdgeNodeOrin", EdgeNodeOrinSchema);
+module.exports = mongoose.model("EdgenodeOrin", EdgenodeOrinSchema);

@@ -32,8 +32,9 @@ const accessoryData = {
   actions: ["Accessory 1", "Accessory 2"],
 };
 const applicationData = {
-  name: "Application",
-  actions: ["Application 1", "Application 2"],
+  name: "LLE",
+  // actions: ["Application 1", "Application 2"],
+  actions: [],
 };
 const DeviceDetails = (props) => {
   const params = useParams();
@@ -51,6 +52,10 @@ const DeviceDetails = (props) => {
     console.log(name);
   };
   console.log(filters);
+
+  const handleInstall = () => {
+    console.log("Installing start");
+  };
   return (
     <>
       {props.viewMode ? (
@@ -142,7 +147,9 @@ const DeviceDetails = (props) => {
               <button className={classes.installButton}>Install</button>
             </div>
             <div className={classes.row}>
-              <button className={classes.installButton}>Install</button>
+              <button className={classes.installButton} onClick={handleInstall}>
+                Install
+              </button>
             </div>
           </div>
           <div className={classes.column}>

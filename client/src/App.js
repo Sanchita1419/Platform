@@ -16,7 +16,6 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* <Route path="/" element={!user ? <Landing /> : <Dashboard />} /> */}
         <Route
           path="/"
           element={!isLoggedIn ? <Landing /> : <DashboardPage />}
