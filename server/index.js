@@ -4,8 +4,11 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const dataRoute = require("./routes/data");
-const authRoute = require("./routes/auth");
+const k8s = require("@kubernetes/client-node");
+// const dataRoute = require("./routes/data");
+// const authRoute = require("./routes/auth");
+const clusterinfoRoute = require("./routes/clusterinfo");
+const kubeRoute = require("./routes/kube");
 
 app.use(bodyParser.json());
 dotenv.config();
@@ -33,8 +36,46 @@ mongoose
 //   useUnifiedTopology: true,
 // });
 
-app.use("/api/data", dataRoute);
-app.use("/api/auth", authRoute);
+const kc = new k8s.KubeConfig();
+kc.loadFromDefault();
+
+const k8sApi = kc.makeApiClient(k8s.AppsV1Api);
+
+/* patchNamespacedDeploymentScale  */
+const fetch = async () => {
+  const response = await k8sApi.patchNamespacedDeploymentScale(
+    "1",
+    "default",
+    {}
+  );
+  console.log(response);
+};
+
+fetch();
+
+// /* get all pods */
+// const getPods = async () => {
+//   const podsResponse = await k8sApi.listPodForAllNamespaces("default");
+
+//   let pods = { deployments: [], node: [] };
+//   for (const pod of podsResponse.body.items) {
+//     if (pod.metadata.namespace === "default") {
+//       // pods.push({
+//       //   deployments: pod.metadata.labels.app,
+//       //   node: pod.spec.nodeName,
+//       // });
+//       pods.deployments.push(pod.metadata.labels.app);
+//       pods.node.push(pod.spec.nodeName);
+//     }
+//   }
+//   console.log(pods);
+// };
+// getPods();
+
+// app.use("/api/data", dataRoute);
+// app.use("/api/auth", authRoute);
+app.use("/api/clusterinfo", clusterinfoRoute);
+app.use("/api/kube", kubeRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

@@ -32,9 +32,9 @@ const accessoryData = {
   actions: ["Accessory 1", "Accessory 2"],
 };
 const applicationData = {
-  name: "LLE",
+  name: "FPI",
   // actions: ["Application 1", "Application 2"],
-  actions: [],
+  actions: ["LLE"],
 };
 const DeviceDetails = (props) => {
   const params = useParams();
