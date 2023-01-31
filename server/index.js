@@ -38,39 +38,79 @@ mongoose
 
 const kc = new k8s.KubeConfig();
 kc.loadFromDefault();
+const k8sAppApi = kc.makeApiClient(k8s.AppsV1Api);
 
-const k8sApi = kc.makeApiClient(k8s.AppsV1Api);
+const targetNamespaceName = "default";
+const targetDeploymentName = "fpi-kubeedge";
+const numberOfTargetReplicas = 0;
 
-/* patchNamespacedDeploymentScale  */
-const fetch = async () => {
-  const response = await k8sApi.patchNamespacedDeploymentScale(
-    "1",
-    "default",
-    {}
+const scale = async (namespace, name, replicas) => {
+  // find the particular deployment
+  const res = await k8sAppApi.readNamespacedDeployment(name, namespace);
+  let deployment = res.body;
+
+  // edit
+  deployment.spec.replicas = replicas;
+
+  // replace
+  const response = await k8sAppApi.replaceNamespacedDeployment(
+    name,
+    namespace,
+    deployment
   );
-  console.log(response);
+  console.log(response.body.status);
 };
 
-fetch();
+scale(targetNamespaceName, targetDeploymentName, numberOfTargetReplicas);
 
-// /* get all pods */
-// const getPods = async () => {
-//   const podsResponse = await k8sApi.listPodForAllNamespaces("default");
+// const container = new k8s.V1Container({
+//   name: "fpi-container",
+//   image: "ghcr.io/myelinfoundry-2019/fpi_platform:12.01.2023",
+//   ports: [new k8s.V1ContainerPort((container_port = 5500))],
+// });
 
-//   let pods = { deployments: [], node: [] };
-//   for (const pod of podsResponse.body.items) {
-//     if (pod.metadata.namespace === "default") {
-//       // pods.push({
-//       //   deployments: pod.metadata.labels.app,
-//       //   node: pod.spec.nodeName,
-//       // });
-//       pods.deployments.push(pod.metadata.labels.app);
-//       pods.node.push(pod.spec.nodeName);
-//     }
-//   }
-//   console.log(pods);
+// const template = new k8s.V1PodTemplateSpec({
+//   metadata: new k8s.V1ObjectMeta((labels = { app: "fpi" })),
+//   spec: new k8s.V1PodSpec({
+//     containers: container,
+//   }),
+// });
+
+// const spec = new k8s.V1DeploymentSpec({
+//   replicas: 1,
+//   template: template,
+//   selector: { matchLabels: { app: "fpi" } },
+// });
+
+// //  Instantiate the deployment object
+// const deployment = new k8s.V1Deployment({
+//   api_version: "apps/v1",
+//   kind: "Deployment",
+//   metadata: new k8s.V1ObjectMeta({ name: "fpi-kubeedge" }),
+//   spec: spec,
+// });
+// console.log(container);
+// // deployment.spec.replicas = 0;
+
+// const api_response = k8sAppApi.patchNamespacedDeployment({
+//   name: "fpi-kubeedge",
+//   namespace: "default",
+//   body: deployment,
+// });
+
+// console.log(api_response);
+
+// /* patchNamespacedDeploymentScale  */
+// const fetch = async () => {
+//   const response = await k8sApi.patchNamespacedDeploymentScale(
+//     "1",
+//     "default",
+//     {}
+//   );
+//   // console.log(response);
 // };
-// getPods();
+
+// fetch();
 
 // app.use("/api/data", dataRoute);
 // app.use("/api/auth", authRoute);

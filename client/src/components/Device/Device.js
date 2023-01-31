@@ -11,6 +11,7 @@ import classes from "./Device.module.css";
 import DeviceHeader from "./DeviceHeader";
 import { axiosInstance } from "../../config";
 import { ColorRing } from "react-loader-spinner";
+import axios from "axios";
 const data = [
   {
     name: "No. of services",
@@ -45,63 +46,78 @@ const deviceInfo = [
     type: "FPI",
     state: "Stopped",
   },
-  // {
-  //   deviceid: "123",
-  //   type: "FPI",
-  //   name: "NVIDIA Orin #1 (Fluroscent Penetrant Inspection)",
-  //   state: "Running",
-  // },
 ];
 const totalCost = deviceInfo.reduce((total, obj) => obj.cost + total, 0);
-console.log(totalCost);
+// console.log(totalCost);
 const Device = () => {
   const [clusterData, setClusterData] = useState({});
-  const [state, setState] = useState("Running");
   const [isLoading, setIsLoading] = useState(true);
+  const [state, setState] = useState("Stopped");
 
-  /* fetch deviceData from db */
+  /* fetch deviceData from kube */
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await axiosInstance.get("/kube");
+  //     // console.log("data");
+  //     // console.log(response.data.nodes.node);
+  //     setClusterData(response.data);
+  //     setIsLoading(false);
+  //   };
+  //   fetchData();
+  // }, []);
+
+  /* fetch data from kube every 10 seconds */
+
   useEffect(() => {
     const fetchData = async () => {
-      // if (Object.keys(clusterData) === 0) {
       const response = await axiosInstance.get("/kube");
-
-      // console.log(response.data[0].ip_address);
-      console.log("data");
-      console.log(response.data.nodes.node);
       setClusterData(response.data);
+      // setState("Running");
+      // const podNo = clusterData.pods.deployments.length;
+      // console.log(podNo);
+      // setState(() => {
+      //   if (podNo > 0) {
+      //     return "Running";
+      //   } else {
+      //     return "Stopped";
+      //   }
+      // });
       setIsLoading(false);
+      // console.log(response.data.pods.deployments.length);
+
+      // console.log(state);
     };
-    // };
     fetchData();
+    const interval = setInterval(() => fetchData(), 10000);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
-  console.log("Test");
-  console.log(clusterData);
+
+  // console.log(noOfPods);
+  // if (!isLoading) {
+  //   if (clusterData.pods.deployments.length > 0) {
+  //     setState("Running");
+  //   }
+  // }
 
   /* start action */
-  const handleStart = () => {
-    console.log("Starting");
+  const handleStart = async () => {
     setState("Running");
+    const response = await axiosInstance.post("/kube/start");
+    console.log(response);
+    console.log("Starting");
   };
 
   /* stop action */
-  const handleStop = () => {
+  const handleStop = async () => {
     console.log("Stoping");
     setState("Stopped");
+    const response = await axiosInstance.post("/kube/stop");
+    console.log(response);
   };
-  // const [active, setActive] = useState(false);
   const navigate = useNavigate();
-  // const toggleActive = () => {
-  //   setActive(!active);
-  // };
-  // console.log(active);
-  // const activeClass = active ? classes.isActive : "";
 
-  // const showDetailHandler = (id, deviceType) => {
-  //   console.log("clicked");
-  //   navigate(`/fleet/devicemanagement/${id}`, {
-  //     state: { type: deviceType, viewMode: active },
-  //   });
-  // };
   return (
     <div className={classes.device}>
       <DeviceHeader />
@@ -146,7 +162,7 @@ const Device = () => {
             </thead>
             <tbody>
               {clusterData.nodes.node.map((d) => (
-                //{deviceInfo.map((d) => (
+                //{clusterData.map((d) => (
                 <tr key={d}>
                   <td>{d}</td>
                   <td>
@@ -162,13 +178,13 @@ const Device = () => {
                     <SignalCellularAltIcon />
                   </td>
                   <td>
-                    {/* <Link
-                    style={{ textDecoration: "none", color: "#114A62" }}
-                    to={`/fleet/devicemanagement/${d.deviceid}`}
-                    state={{ type: "" , name: d }}
-                  >
-                    <SettingsIcon style={{ cursor: "pointer" }} />
-                  </Link> */}
+                    <Link
+                      style={{ textDecoration: "none", color: "#114A62" }}
+                      to={`/fleet/devicemanagement/${d.deviceid}`}
+                      state={{ type: "", name: d }}
+                    >
+                      <SettingsIcon style={{ cursor: "pointer" }} />
+                    </Link>
 
                     {/* <SettingsIcon
                     style={{ cursor: "pointer" }}

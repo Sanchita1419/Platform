@@ -22,7 +22,7 @@ const DeviceHeader = (props) => {
     console.log(value);
     console.log(name);
   };
-  console.log(filters);
+
   return (
     <div className={classes.deviceHeader}>
       <div className={classes.addButton}>
