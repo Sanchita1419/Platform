@@ -16,9 +16,13 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route
+        {/* <Route
           path="/"
           element={!isLoggedIn ? <Landing /> : <DashboardPage />}
+        /> */}
+        <Route
+          path="/"
+          element={!isLoggedIn ? <Landing /> : <Visualization />}
         />
         <Route path="/visualization" element={<Visualization />} />
         <Route path="/fleet" element={<FleetManagement />} />

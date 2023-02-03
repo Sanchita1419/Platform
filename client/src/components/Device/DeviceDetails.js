@@ -49,7 +49,7 @@ const DeviceDetails = (props) => {
       setIsLoading(false);
     };
     fetchData();
-    const interval = setInterval(() => fetchData(), 10000);
+    const interval = setInterval(() => fetchData(), 5000);
     return () => {
       clearInterval(interval);
     };
@@ -299,10 +299,10 @@ const DeviceDetails = (props) => {
                       </>
                     ))} */}
                       <>
-                        <span>Accessory 1</span>
+                        {/* <span>Accessory 1</span>
                         <br />
                         <span>Accessory 2</span>
-                        <br />
+                        <br /> */}
                       </>
                     </td>
                     <td>

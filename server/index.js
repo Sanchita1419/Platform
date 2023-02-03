@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const k8s = require("@kubernetes/client-node");
-// const dataRoute = require("./routes/data");
+const dataRoute = require("./routes/data");
 // const authRoute = require("./routes/auth");
 const clusterinfoRoute = require("./routes/clusterinfo");
 const kubeRoute = require("./routes/kube");
@@ -58,7 +58,7 @@ const scale = async (namespace, name, replicas) => {
     namespace,
     deployment
   );
-  console.log(response.body.status);
+  //console.log(response.body.status);
 };
 
 scale(targetNamespaceName, targetDeploymentName, numberOfTargetReplicas);
@@ -112,9 +112,9 @@ scale(targetNamespaceName, targetDeploymentName, numberOfTargetReplicas);
 
 // fetch();
 
-// app.use("/api/data", dataRoute);
+app.use("/api/data", dataRoute);
 // app.use("/api/auth", authRoute);
-app.use("/api/clusterinfo", clusterinfoRoute);
+// app.use("/api/clusterinfo", clusterinfoRoute);
 app.use("/api/kube", kubeRoute);
 
 const PORT = process.env.PORT || 5000;

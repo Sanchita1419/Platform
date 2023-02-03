@@ -10,10 +10,10 @@
 
 .modal {
   position: fixed;
-  top: 10vh;
-  left: 5%;
-  width: 90%;
-  height: 80%;
+  top: 25vh;
+  left: 35%;
+  width: 25%;
+  height: 50%;
   background-color: white;
   padding: 1rem;
   border-radius: 14px;
@@ -23,16 +23,16 @@
 }
 
 /* @media (min-width: 768px) {
-  .modal {
-    width: 90%;
-    left: calc(50% - 20rem);
+    .modal {
+      width: 90%;
+      left: calc(50% - 20rem);
+    }
   }
-}
-@media (max-width: 380px) {
-  .modal {
-    max-height: 90%;
-  }
-} */
+  @media (max-width: 380px) {
+    .modal {
+      max-height: 90%;
+    }
+  } */
 @keyframes slide-down {
   from {
     opacity: 0;

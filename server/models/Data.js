@@ -4,7 +4,7 @@ const DataSchema = new mongoose.Schema({
   device_id: { type: String },
   plant: { type: String },
   line: { type: String },
-  date: { type: Date },
+  date: { type: String },
   time: { type: String },
   inspector_name: { type: String },
   part_no: { type: Number },

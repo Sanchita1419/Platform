@@ -11,7 +11,9 @@ import classes from "./Device.module.css";
 import DeviceHeader from "./DeviceHeader";
 import { axiosInstance } from "../../config";
 import { ColorRing } from "react-loader-spinner";
-import axios from "axios";
+import Assign from "./Assign";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const data = [
   {
     name: "No. of services",
@@ -53,6 +55,8 @@ const Device = () => {
   const [clusterData, setClusterData] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [state, setState] = useState("Stopped");
+  const [showAssign, setShowAssign] = useState(false);
+  const [item, setItem] = useState("");
 
   /* fetch deviceData from kube */
   // useEffect(() => {
@@ -100,9 +104,21 @@ const Device = () => {
   //     setState("Running");
   //   }
   // }
-
+  const sendItem = (i) => {
+    setItem(i);
+  };
   /* start action */
   const handleStart = async () => {
+    toast("Started", {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     setState("Running");
     const response = await axiosInstance.post("/kube/start");
     console.log(response);
@@ -116,13 +132,33 @@ const Device = () => {
     const response = await axiosInstance.post("/kube/stop");
     console.log(response);
   };
+  const handleHideAssign = () => {
+    setShowAssign(false);
+  };
+  const handleShowAssign = () => {
+    setShowAssign(true);
+  };
   const navigate = useNavigate();
 
   return (
-    <div className={classes.device}>
-      <DeviceHeader />
+    <>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {!showAssign ? (
+        <div className={classes.device}>
+          <DeviceHeader />
 
-      {/* <div className={classes.deviceCardContainer}>
+          {/* <div className={classes.deviceCardContainer}>
         {data.map((D) => (
           <div key={D.name} className={classes.deviceCard}>
             <p className={classes.name}>
@@ -136,98 +172,111 @@ const Device = () => {
         ))}
       </div> */}
 
-      {isLoading ? (
-        <div className="loadingContainer">
-          <ColorRing
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="blocks-loading"
-            wrapperStyle={{}}
-            wrapperClass="blocks-wrapper"
-            colors={["#114A62"]}
-          />
-        </div>
-      ) : (
-        <div className={classes.table}>
-          <table className={classes.deviceTable}>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>State</th>
-                <th>Metric</th>
-                <th>Config</th>
-                <th>Operations</th>
-              </tr>
-            </thead>
-            <tbody>
-              {clusterData.nodes.node.map((d) => (
-                //{clusterData.map((d) => (
-                <tr key={d}>
-                  <td>{d}</td>
-                  <td>
-                    <button
-                      className={`${classes.stateButton} ${
-                        state === "Stopped" ? classes.stop : classes.running
-                      }`}
-                    >
-                      {state}
-                    </button>
-                  </td>
-                  <td>
-                    <SignalCellularAltIcon />
-                  </td>
-                  <td>
-                    <Link
-                      style={{ textDecoration: "none", color: "#114A62" }}
-                      to={`/fleet/devicemanagement/${d.deviceid}`}
-                      state={{ type: "", name: d }}
-                    >
-                      <SettingsIcon style={{ cursor: "pointer" }} />
-                    </Link>
+          {isLoading ? (
+            <div className="loadingContainer">
+              <ColorRing
+                visible={true}
+                height="80"
+                width="80"
+                ariaLabel="blocks-loading"
+                wrapperStyle={{}}
+                wrapperClass="blocks-wrapper"
+                colors={["#114A62"]}
+              />
+            </div>
+          ) : (
+            <div className={classes.table}>
+              <table className={classes.deviceTable}>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>State</th>
+                    <th>Metric</th>
+                    <th>Config</th>
+                    <th>Operations</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {clusterData.nodes.node.map((d) => (
+                    //{clusterData.map((d) => (
+                    <tr key={d}>
+                      <td>{d}</td>
+                      <td>
+                        <button
+                          className={`${classes.stateButton} ${
+                            state === "Stopped" ? classes.stop : classes.running
+                          }`}
+                        >
+                          {state}
+                        </button>
+                      </td>
+                      <td>
+                        <SignalCellularAltIcon />
+                      </td>
+                      <td>
+                        <Link
+                          style={{ textDecoration: "none", color: "#114A62" }}
+                          to={`/fleet/devicemanagement/${d.deviceid}`}
+                          state={{ type: "", name: d }}
+                        >
+                          <SettingsIcon style={{ cursor: "pointer" }} />
+                        </Link>
 
-                    {/* <SettingsIcon
+                        {/* <SettingsIcon
                     style={{ cursor: "pointer" }}
                     onClick={showDetailHandler(d.deviceid, d.type)}
                   /> */}
-                  </td>
-                  <td className={classes.operationButtons}>
-                    <div className={classes.buttonGroup}>
-                      <button
-                        style={{ backgroundColor: "rgb(139, 211, 211)" }}
-                        onClick={handleStart}
-                      >
-                        Start
-                      </button>
-                      <button style={{ backgroundColor: "rgb(127, 240, 197)" }}>
-                        Restart
-                      </button>
-                      <button
-                        style={{ backgroundColor: "rgb(255, 218, 218)" }}
-                        onClick={handleStop}
-                      >
-                        Stop
-                      </button>
-                    </div>
-                    <div className={classes.buttonGroup}>
-                      <button style={{ backgroundColor: "rgb(177, 182, 255)" }}>
-                        Assign
-                      </button>
-                      <button style={{ backgroundColor: "rgb(198, 177, 255)" }}>
-                        Remove
-                      </button>
-                      <button style={{ backgroundColor: "rgb(254, 255, 177)" }}>
-                        Upgrade
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                      </td>
+                      <td className={classes.operationButtons}>
+                        <div className={classes.buttonGroup}>
+                          <button
+                            style={{ backgroundColor: "rgb(139, 211, 211)" }}
+                            onClick={handleStart}
+                          >
+                            Start
+                          </button>
+                          <button
+                            style={{ backgroundColor: "rgb(127, 240, 197)" }}
+                          >
+                            Restart
+                          </button>
+                          <button
+                            style={{ backgroundColor: "rgb(255, 218, 218)" }}
+                            onClick={handleStop}
+                          >
+                            Stop
+                          </button>
+                        </div>
+                        <div className={classes.buttonGroup}>
+                          <button
+                            style={{ backgroundColor: "rgb(177, 182, 255)" }}
+                            onClick={handleShowAssign}
+                          >
+                            Assign
+                          </button>
+                          <button
+                            style={{ backgroundColor: "rgb(198, 177, 255)" }}
+                          >
+                            Remove
+                          </button>
+                          <button
+                            style={{ backgroundColor: "rgb(254, 255, 177)" }}
+                          >
+                            Upgrade
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
+      ) : (
+        <Assign sendItem={sendItem} onClose={handleHideAssign} />
       )}
-    </div>
+    </>
   );
 };
 

@@ -36,24 +36,20 @@ router.get("/", async (req, res) => {
   const podsResponse = await k8sApi.listPodForAllNamespaces("default");
   for (const pod of podsResponse.body.items) {
     if (pod.metadata.namespace === "default") {
-      // pods.push({
-      //   deployments: pod.metadata.labels.app,
-      //   node: pod.spec.nodeName,
-      // });
-
       pods.deployments.push(pod.metadata.labels.app);
       for (let i = 0; i < nodes.ip_address.length; i++) {
-        console.log(nodes.ip_address[i]);
+        //console.log(nodes.ip_address[i]);
         if (nodes.ip_address[i] === pod.status.hostIP) {
           pods.node.push(nodes.node[i]);
         }
       }
     }
   }
+
   // console.log(nodes);
   cluster.push(nodes);
   cluster.push(pods);
-  console.log(cluster);
+  //console.log(cluster);
   res.status(200).json({ nodes, pods });
   // res.status(200).json(cluster);
   // console.log(pods);

@@ -1,5 +1,5 @@
 import HelpIcon from "@mui/icons-material/Help";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import BarChart2 from "../Chart/BarChart2";
 import BarCharts from "../Chart/BarCharts";
 import ScatterChart from "../Chart/ScatterCharts";
@@ -7,6 +7,7 @@ import DropdownButtons from "../UI/DropdownButtons";
 import classes from "./Visualize.module.css";
 import VisualizeButtons from "./VisualizeButtons";
 import GraphCard from "../UI/GraphCard";
+import { axiosInstance } from "../../config";
 
 const graphData = [
   {
@@ -40,7 +41,18 @@ const deviceData = {
 const Visualize = () => {
   // const [value, setValue] = useState("");
   const [filters, setFilters] = useState({});
+  const [totalParts, setTotalParts] = useState(0);
   const scatterRef = useRef();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axiosInstance.get("/data/totalparts");
+      setTotalParts(response.data);
+      console.log(response.data);
+    };
+    fetchData();
+  }, []);
+
   const handleFilter = (name, value) => {
     setFilters({ ...filters, [name]: value });
   };
@@ -51,7 +63,7 @@ const Visualize = () => {
     console.log(name);
   };
 
-  console.log(filters);
+  // console.log(filters);
   return (
     <div className={classes.visualize}>
       <div className={classes.visualizeHeader}>
@@ -83,7 +95,7 @@ const Visualize = () => {
           </div>
         </div>
         <div className={classes.row}>
-          <div className={classes.graphContainer}>
+          <div className={`${classes.graphContainer} ${classes.disabled}`}>
             <h3>Parts Inspected</h3>
             <BarChart2 />
             <div className={classes.visualizeButtonContainer}>
@@ -92,7 +104,7 @@ const Visualize = () => {
           </div>
           <div className={classes.graphContainer}>
             <h3>Total Parts Inspected</h3>
-            <div className={classes.totalParts}>100</div>
+            <div className={classes.totalParts}>{totalParts}</div>
             <div>
               <span>Cumulative</span>
               <span>
